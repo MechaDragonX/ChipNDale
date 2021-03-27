@@ -2,15 +2,21 @@
 #include <fstream>
 #include "chip8.hpp"
 
+// Default Constructor
 Chip8::Chip8() {
     /*
         Initialize the program counter to 0x200
         This where all instructions will begin as the ROM contents will be loaded from here
         0x000 to 0x1FF is reserved for system functions, so all ROM data is stored after that
     */
-    programCounter = START_ADDRESS;
+    programCounter = ROM_START_ADDRESS;
+
+    // Load fonts into memory from 0x050
+    for(unsigned int i = 0; i < 80; i++)
+        memory[FONTSET_START_ADDRESS + i] = fontset[i];
 }
 
+// Loads a ROM into memoery at the START_ADDRESS
 void Chip8::loadROM(const char* filename) {
     // Open the file isomg a bonary stream and move the file pointer to the end
     std::ifstream file(filename, std::ios::binary | std::ios::ate);
@@ -33,7 +39,7 @@ void Chip8::loadROM(const char* filename) {
             0x000 to 0x1FF is reserved for system functions, so all ROM data is stored after that
         */
         for(int i = 0; i < size; i++)
-            memory[START_ADDRESS + i] = buffer[i];
+            memory[ROM_START_ADDRESS + i] = buffer[i];
 
         // Delete the buffer
         delete[] buffer;
