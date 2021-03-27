@@ -1,7 +1,9 @@
 #ifndef CHIP8_HPP
 #define CHIP8_HPP
 
+#include <chrono>
 #include <cstdint>
+#include <random>
 
 class Chip8 {
     private:
@@ -41,6 +43,9 @@ class Chip8 {
             0xF0, 0x80, 0xF0, 0x80, 0xF0,                       // E
             0xF0, 0x80, 0xF0, 0x80, 0x80                        // F
         };
+
+        std::default_random_engine randomGenerator;
+        std::uniform_int_distribution<uint8_t> randomByte;
 
         Chip8();                                            // Default Constructor
 

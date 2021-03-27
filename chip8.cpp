@@ -1,9 +1,12 @@
+#include <chrono>
 #include <cstdint>
 #include <fstream>
+#include <random>
 #include "chip8.hpp"
 
 // Default Constructor
-Chip8::Chip8() {
+// Initializer list seeds the RNG
+Chip8::Chip8() : randomGenerator(std::chrono::system_clock::now().time_since_epoch().count()) {
     /*
         Initialize the program counter to 0x200
         This where all instructions will begin as the ROM contents will be loaded from here
@@ -12,8 +15,10 @@ Chip8::Chip8() {
     programCounter = ROM_START_ADDRESS;
 
     // Load fonts into memory from 0x050
-    for(unsigned int i = 0; i < 80; i++)
+    for(int i = 0; i < 80; i++)
         memory[FONTSET_START_ADDRESS + i] = fontset[i];
+
+    randomByte = std::uniform_int_distribution<uint8_t>(0, 255U);
 }
 
 // Loads a ROM into memoery at the START_ADDRESS
