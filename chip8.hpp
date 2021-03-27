@@ -9,6 +9,12 @@ class Chip8 {
     private:
         const unsigned int ROM_START_ADDRESS = 0x200;       // Address at which the contents of ROMs are loaded into memory
         const unsigned int FONTSET_START_ADDRESS = 0x050;   // Address at which the fontset is loaded into memory
+        const int FONTSET_LENGTH = 80;                      // Constant Length of Fontset in Bytes (see fonset for more details)
+        const int VIDEO_WIDTH = 64;                         // Width of Video Display
+        const int VIDEO_HEIGHT = 32;                        // Height of Video Display
+        const int SPRITE_WIDTH = 8;                         // Constant Sprite Width
+        const int KEY_COUNT = 16;                           // Number of Keys
+        const int CHARACTER_LENGTH = 5;                     // Constant Length of Characters in Bytes (see fonstset for more details)
     public:
         // CPU State Information
         uint8_t registers[16];                              // 16 8-bit Registers
@@ -23,7 +29,7 @@ class Chip8 {
         // I/O State Information
         uint8_t soundTimer;                                 // Controls Timing of Sound
         uint8_t keypad[16];                                 // The CHIP-8 has 16 Input Keys which are represented by 0x0 to 0xF
-        uint32_t video[2048];                               // Display memory for a display 64 pixels wide * 32 pixels tall
+        uint32_t video[2048];                               // Video memory for a display 64 pixels wide * 32 pixels tall
 
         uint8_t fontset[80] = {                             // 80 bytes that represents all the chracters the screen can display
             0xF0, 0x90, 0x90, 0x90, 0xF0,                       // 0
@@ -76,8 +82,8 @@ class Chip8 {
         void OP_Bnnn();                                     // JP V0, <address> - Jump to Location nnn + V0
         void OP_Cxkk();                                     // RND Vx, <byte> - Set Vx = <random byte> & kk
         void OP_Dxyn();                                     // DRW Vx, Vy, <nibble> - Display n-byte sprite starting at memory Location I at (Vx, Vy), Set VF = Collision
-        void OP_Ex9E();                                     // SKP Vx - Skip next instruction if key of Value Vx is pressed
-        void OP_ExA1();                                     // SKNP Vx - Skip next instruction if key of Value Vx is not pressed
+        void OP_Ex9E();                                     // SKP Vx - Skip next instruction if key of value Vx is pressed
+        void OP_ExA1();                                     // SKNP Vx - Skip next instruction if key of value Vx is not pressed
         void OP_Fx07();                                     // LD Vx, DT - Set Vx = <Delay Time Value>
         void OP_Fx0A();                                     // LD Vx, L - Wait for key press, store value of key in Vx
         void OP_Fx15();                                     // LD DT, Vx - Set Delay Timer to Vx
