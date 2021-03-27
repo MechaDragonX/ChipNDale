@@ -15,7 +15,7 @@ class Chip8 {
         uint8_t soundTimer;             // Controls Timing of Sound
         uint8_t keypad[16];             // The CHIP-8 has 16 Input Keys which are represented by 0x0 to 0xF
         uint32_t video[2048];           // Display Memory for a Display 64 pixels wide * 32 pixels tall
-        uint16_t opcode;                // An Encoded Form of the Operation and Relative Data as a Number
+        uint16_t opcode;                // An Encoded Form of the Operation and Relevant Data as a Number
 };
 
 #endif
