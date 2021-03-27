@@ -6,7 +6,7 @@ OBJS = chip8.o
 chipndale: $(OBJS)
 	$(CC) -o $@ $^
 
-chip8.o: chip.8.cpp chip8.hpp
+chip8.o: chip8.cpp chip8.hpp
 	$(CC) -c chip8.cpp
 
 clean:
