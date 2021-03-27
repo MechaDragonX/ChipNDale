@@ -12,7 +12,7 @@ class Chip8 {
     public:
         // CPU State Information
         uint8_t registers[16];                              // 16 8-bit Registers
-        uint8_t memory[4096];                               // Represents each of the 4096 <byte>s of memory
+        uint8_t memory[4096];                               // Represents each of the 4096 bytes of memory
         uint16_t index;                                     // Index register for storing memory addresses for aperations
         uint16_t programCounter;                            // Adress of Next Instruction
         uint16_t opcode;                                    // An encoded form of the operation and relevant data as a number
@@ -25,7 +25,7 @@ class Chip8 {
         uint8_t keypad[16];                                 // The CHIP-8 has 16 Input Keys which are represented by 0x0 to 0xF
         uint32_t video[2048];                               // Display memory for a display 64 pixels wide * 32 pixels tall
 
-        uint8_t fontset[80] = {                             // 80 <byte>s that represents all the chracters the screen can display
+        uint8_t fontset[80] = {                             // 80 bytes that represents all the chracters the screen can display
             0xF0, 0x90, 0x90, 0x90, 0xF0,                       // 0
             0x20, 0x60, 0x20, 0x20, 0x70,                       // 1
             0xF0, 0x10, 0xF0, 0x80, 0xF0,                       // 2
