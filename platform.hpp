@@ -1,6 +1,7 @@
 #ifndef PLATFORM_HPP
 #define PLATFORM_HPP
 
+#include <cstdint>
 #include <SDL2/SDL.h>
 // #include <SDL2/SDL_video.h>
 #include <SDL2/SDL_render.h>
@@ -14,8 +15,8 @@ class Platform {
         Platform(const char* title, int windowWidth, int windowHeight, int textureWidth, int textureHeight);
         ~Platform();
 
-        void update();
-        void processInput();
+        void update(const void* buffer, int pitch);
+        bool processInput(uint8_t* keys);
 };
 
 #endif
