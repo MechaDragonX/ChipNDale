@@ -1,13 +1,17 @@
-CC=g++
-# CFLAGS=
+CXX=g++
+CXXFLAGS=-std=c++17
+LDLIBS=-lSDL2
 # DEPS =
-OBJS = chip8.o
+OBJS = chip8.o platform.o
 
 chipndale: $(OBJS)
-	$(CC) -o $@ $^
+	$(CXX) -o $@ $^ $(CXXFLAGS) $(LDLIBS)
 
 chip8.o: chip8.cpp chip8.hpp
-	$(CC) -c chip8.cpp
+	$(CXX) -c chip8.cpp
+
+platform.o: platform.cpp platform.hpp
+	$(CXX) -c platform.cpp
 
 clean:
 	rm $(OBJS) chipndale
