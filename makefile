@@ -1,7 +1,6 @@
 CXX=g++
 CXXFLAGS=-std=c++17
 LDLIBS=-lSDL2
-# DEPS =
 OBJS = chip8.o renderer.o main.o
 
 chipndale: $(OBJS)

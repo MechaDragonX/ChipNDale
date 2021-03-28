@@ -68,9 +68,9 @@ Chip8::Chip8() : randomGenerator(std::chrono::system_clock::now().time_since_epo
 }
 
 // Loads a ROM into memoery at the START_ADDRESS
-void Chip8::loadROM(const char* filename) {
-    // Open the file isomg a bonary stream and move the file pointer to the end
-    std::ifstream file(filename, std::ios::binary | std::ios::ate);
+void Chip8::loadROM(const char* path) {
+    // Open the file as a binary stream and move the file pointer to the end
+    std::ifstream file(path, std::ios::binary | std::ios::ate);
 
     if(file.is_open()) {
         // Since the pointer is at the end, you can get the size of the file by getting the current position in the stream
