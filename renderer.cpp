@@ -2,26 +2,26 @@
 #include <SDL2/SDL_render.h>
 #include "platform.hpp"
 
-Platform::Platform(const char* title, int windowWidth, int windowHeight, int textureWidth, int textureHeight) {
+Renderer::Renderer(const char* title, int windowWidth, int windowHeight, int textureWidth, int textureHeight) {
     SDL_Init(SDL_INIT_VIDEO);
     window_ = SDL_CreateWindow(title, 0, 0, windowWidth, windowHeight, SDL_WINDOW_SHOWN);
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
     texture_ = SDL_CreateTexture(renderer_, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, textureWidth, textureHeight);
 }
-Platform::~Platform() {
+Renderer::~Renderer() {
     SDL_DestroyTexture(texture_);
     SDL_DestroyRenderer(renderer_);
     SDL_DestroyWindow(window_);
     SDL_Quit();
 }
 
-void Platform::update(const void* buffer, int pitch) {
+void Renderer::update(const void* buffer, int pitch) {
     SDL_UpdateTexture(texture_, nullptr, buffer, pitch);
     SDL_RenderClear(renderer_);
     SDL_RenderCopy(renderer_, texture_, nullptr, nullptr);
     SDL_RenderPresent(renderer_);
 }
-bool Platform::processInput(uint8_t* keys) {
+bool Renderer::processInput(uint8_t* keys) {
     bool quit = false;
 
     SDL_Event event;
