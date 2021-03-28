@@ -5,8 +5,10 @@
 #include <random>
 #include "chip8.hpp"
 
-// Default Constructor
-// Initializer list seeds the RNG
+/*
+    Initialize the CHIP-8
+    Seed the RNG with the current time, load the fontset into memoery, setup random bytes, and initialize the function table.
+*/
 Chip8::Chip8() : randomGenerator(std::chrono::system_clock::now().time_since_epoch().count()) {
     /*
         Initialize the program counter to 0x200
@@ -92,6 +94,29 @@ void Chip8::loadROM(const char* filename) {
 
         // Delete the buffer
         delete[] buffer;
+    }
+}
+// Fetch, Decode, and Execute Each Instruction
+void Chip8::cycle() {
+    // Fetch the next instruction and store it as the opcode
+    opcode = (memory[programCounter] << 8u) | memory[programCounter + 1];
+
+    // Increment program counter before execution 
+    programCounter += 2;
+
+    /*
+        Decode: Get the first digit of the opcode with a bitmask, right shift so it's a single digit
+        Execute: Execute the instruction using this digit and the table
+    */
+    ((*this).*(functionTable[(opcode & 0xF000u) >> 12u]))();
+
+    // Decrement the delay timer if it's been set
+    if(delayTimer > 0) {
+        delayTimer--;
+    }
+    // Decrement the sound timer if it's been set
+    if(soundTimer > 0) {
+        soundTimer--;
     }
 }
 

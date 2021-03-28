@@ -55,6 +55,7 @@ class Chip8 {
 
         Chip8();                                                        // Initialize the CHIP-8
         void loadROM(const char* filename);                             // Loads a ROM into memoery at the START_ADDRESS
+        void cycle();                                                   // Fetch, Decode, and Execute Each Instruction
 
         // CPU Instructions
 
