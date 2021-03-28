@@ -1,6 +1,6 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_render.h>
-#include "platform.hpp"
+#include "renderer.hpp"
 
 // Creates Display Window
 Renderer::Renderer(const char* title, int windowWidth, int windowHeight, int textureWidth, int textureHeight) {
