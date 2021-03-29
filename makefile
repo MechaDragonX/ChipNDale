@@ -21,16 +21,16 @@ OBJDIR = obj
 BINDIR = bin
 
 $(TARGET): $(OBJS)
-	$(CXX) -o $(BINDIR)/$@ $^ $(CXXFLAGS) $(LDLIBS)
+	$(CXX) $^ -o $(BINDIR)/$@ $(CXXFLAGS) $(LDLIBS)
 
 obj/chip8.o: chip8.cpp chip8.hpp
-	$(CXX) -c chip8.cpp -o $(OBJDIR)/chip8.o $(CXXFLAGS) 
+	$(CXX) chip8.cpp -c -o $(OBJDIR)/chip8.o $(CXXFLAGS) 
 
 obj/renderer.o: renderer.cpp renderer.hpp
-	$(CXX) -c renderer.cpp -o $(OBJDIR)/renderer.o $(CXXFLAGS)
+	$(CXX) renderer.cpp -c -o $(OBJDIR)/renderer.o $(CXXFLAGS)
 
 obj/main.o: main.cpp chip8.hpp renderer.hpp
-	$(CXX) -c main.cpp -o $(OBJDIR)/main.o $(CXXFLAGS)
+	$(CXX) main.cpp -c -o $(OBJDIR)/main.o $(CXXFLAGS)
 
 setup:
 	mkdir -p $(OBJDIR) $(BINDIR)
