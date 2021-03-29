@@ -1,12 +1,26 @@
-CXX=g++
-CXXFLAGS=-std=c++17
-LDLIBS=-lSDL2
-OBJS=obj/chip8.o obj/renderer.o obj/main.o
-BIN=chipndale
-OBJDIR=obj
-BINDIR=bin
+CXX = g++
+CXXFLAGS = -std=c++17
 
-chipndale: $(OBJS)
+LDLIBS :=
+ifeq ($(OS),Windows_NT)
+	LDLIBS += -lmingw32 -lSDL2main -lSDL2
+else
+	LDLIBS += -lSDL2
+endif
+
+OBJS = obj/chip8.o obj/renderer.o obj/main.o
+
+TARGET :=
+ifeq ($(OS),Windows_NT)
+	TARGET += chipndale.exe
+else
+	TARGET += chipndale
+endif
+
+OBJDIR = obj
+BINDIR = bin
+
+$(TARGET): $(OBJS)
 	$(CXX) -o $(BINDIR)/$@ $^ $(CXXFLAGS) $(LDLIBS)
 
 obj/chip8.o: chip8.cpp chip8.hpp
@@ -22,4 +36,4 @@ setup:
 	mkdir -p $(OBJDIR) $(BINDIR)
 
 clean:
-	rm $(OBJS) $(BINDIR)/$(BIN)
+	rm $(OBJS) $(BINDIR)/$(TARGET)
