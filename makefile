@@ -1,7 +1,7 @@
 CXX=g++
 CXXFLAGS=-std=c++20
 
-LDLIBS=
+LDLIBS:=
 ifeq ($(OS),Windows_NT)
 	LDLIBS+=-lmingw32 -lSDL2main -lSDL2
 else
@@ -10,7 +10,7 @@ endif
 
 OBJS=obj/chip8.o obj/renderer.o obj/main.o
 
-TARGET=
+TARGET:=
 ifeq ($(OS),Windows_NT)
 	TARGET+=chipndale.exe
 else
