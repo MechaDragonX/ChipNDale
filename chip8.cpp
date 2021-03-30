@@ -23,6 +23,7 @@ Chip8::Chip8() : randomGenerator(std::chrono::system_clock::now().time_since_epo
 
     randomByte = std::uniform_int_distribution<uint8_t>(0, 255u);
 
+    // Setup Function Pointer Table
     functionTable[0x00] = &Chip8::functionTableWrapper0;
     functionTable[0x01] = &Chip8::op_1nnn;
     functionTable[0x02] = &Chip8::op_2nnn;
@@ -89,7 +90,7 @@ void Chip8::loadROM(const char* path) {
             Load the contents of the rom into memory by taking each character in the buffer and setting it to each memory address, beginning with 0x200
             0x000 to 0x1FF is reserved for system functions, so all ROM data is stored after that
         */
-        for(unsigned int i = 0; i < size; i++)
+        for(long i = 0; i < size; i++)
             memory[ROM_START_ADDRESS + i] = buffer[i];
 
         // Delete the buffer
@@ -111,13 +112,11 @@ void Chip8::cycle() {
     ((*this).*(functionTable[(opcode & 0xF000u) >> 12u]))();
 
     // Decrement the delay timer if it's been set
-    if(delayTimer > 0) {
+    if(delayTimer > 0)
         delayTimer--;
-    }
     // Decrement the sound timer if it's been set
-    if(soundTimer > 0) {
+    if(soundTimer > 0)
         soundTimer--;
-    }
 }
 
 // CPU Instructions

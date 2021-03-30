@@ -1,7 +1,6 @@
 #ifndef CHIP8_HPP
 #define CHIP8_HPP
 
-#include <chrono>
 #include <cstdint>
 #include <random>
 

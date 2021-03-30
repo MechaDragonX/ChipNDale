@@ -9,7 +9,7 @@ Renderer::Renderer(const char* title, int windowWidth, int windowHeight, int tex
     renderer_ = SDL_CreateRenderer(window_, -1, SDL_RENDERER_ACCELERATED);
     texture_ = SDL_CreateTexture(renderer_, SDL_PIXELFORMAT_RGBA8888, SDL_TEXTUREACCESS_STREAMING, textureWidth, textureHeight);
 }
-// Destroy each field object and drops displaying graphics
+// Destroy each field object and stops displaying graphics
 Renderer::~Renderer() {
     SDL_DestroyTexture(texture_);
     SDL_DestroyRenderer(renderer_);
