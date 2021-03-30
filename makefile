@@ -1,24 +1,24 @@
-CXX = g++
-CXXFLAGS = -std=c++20
+CXX=g++
+CXXFLAGS=-std=c++20
 
-LDLIBS :=
+LDLIBS=
 ifeq ($(OS),Windows_NT)
-	LDLIBS += -lmingw32 -lSDL2main -lSDL2
+	LDLIBS+=-lmingw32 -lSDL2main -lSDL2
 else
-	LDLIBS += -lSDL2
+	LDLIBS+=-lSDL2
 endif
 
-OBJS = obj/chip8.o obj/renderer.o obj/main.o
+OBJS=obj/chip8.o obj/renderer.o obj/main.o
 
-TARGET :=
+TARGET=
 ifeq ($(OS),Windows_NT)
-	TARGET += chipndale.exe
+	TARGET+=chipndale.exe
 else
-	TARGET += chipndale
+	TARGET+=chipndale
 endif
 
-OBJDIR = obj
-BINDIR = bin
+OBJDIR=obj
+BINDIR=bin
 
 $(TARGET): $(OBJS)
 	$(CXX) $^ -o $(BINDIR)/$@ $(CXXFLAGS) $(LDLIBS)
