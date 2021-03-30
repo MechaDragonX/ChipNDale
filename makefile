@@ -24,7 +24,7 @@ $(TARGET): $(OBJS)
 	$(CXX) $^ -o $(BINDIR)/$@ $(CXXFLAGS) $(LDLIBS)
 
 obj/chip8.o: chip8.cpp chip8.hpp
-	$(CXX) chip8.cpp -c -o $(OBJDIR)/chip8.o $(CXXFLAGS) 
+	$(CXX) chip8.cpp -c -o $(OBJDIR)/chip8.o $(CXXFLAGS)
 
 obj/renderer.o: renderer.cpp renderer.hpp
 	$(CXX) renderer.cpp -c -o $(OBJDIR)/renderer.o $(CXXFLAGS)
